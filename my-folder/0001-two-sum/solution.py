@@ -1,17 +1,12 @@
-class Solution(object):
-    def twoSum(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: List[int]
-        """
-        indices = {}
+import enum
 
+
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        seen = {}
         for i, n in enumerate(nums):
-            diff = target - n
-            if diff in indices:
-                return [indices[diff], i]
-            indices[n] = i
-
+            if target - n in seen:
+                return [i, seen.get(target - n, 0)]
+            seen[n] = i
         return []
 
