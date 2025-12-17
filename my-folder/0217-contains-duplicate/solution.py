@@ -1,13 +1,9 @@
-class Solution(object):
-    def containsDuplicate(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: bool
-        """
-        map = {}
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        seen = set()
         for n in nums:
-            if map.get(n, False):
+            if n in seen:
                 return True
-            map[n] = True
+            seen.add(n)
         return False
 
