@@ -2,15 +2,14 @@ class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
         if len(s) != len(t):
             return False
-        chars = {}
+        count = [0] * 26
         for c in s:
-            chars[c] = chars.get(c, 0) + 1
+            count[ord(c) - ord("a")] += 1
         for c in t:
-            if c not in chars:
+            idx = ord(c) - ord("a")
+            count[idx] -= 1
+            if count[idx] < 0:
                 return False
-            chars[c] -= 1
-            if chars[c] < 0:
-                return False
-        return True
+        return count == [0] * 26
 
 
