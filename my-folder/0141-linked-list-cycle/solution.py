@@ -1,30 +1,22 @@
 # Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next: Optional[ListNode] = None
 
 
 class Solution:
-    def hashHelper(self, head):
-        hash_set = set()
-
-        while head:
-            if head in hash_set:
-                return True
-            hash_set.add(head)
-            head = head.next
-
-        return False
-
     def hasCycle(self, head: Optional[ListNode]) -> bool:
-        slow, fast = head, head
+        if head is None:
+            return False
 
-        while fast and fast.next:
+        slow: ListNode = head
+        fast: ListNode = head
+        while fast.next and fast.next.next:
             slow = slow.next
             fast = fast.next.next
-            if slow == fast:
+            if slow is fast:
                 return True
-
         return False
+
 
