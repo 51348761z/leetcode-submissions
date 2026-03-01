@@ -1,22 +1,25 @@
 class Solution:
-    def helper(self, s, l, r):
-        res = ""
-        resLength = 0
-        n = len(s)
-        while l >= 0 and r < n and s[l] == s[r]:
-            if (r - l + 1) > resLength:
-                resLength = r - l + 1
-                res = s[l:r + 1]
-            l -= 1
-            r += 1
-        return res
-
     def longestPalindrome(self, s: str) -> str:
-        res = ""
+        longest = ""
+        longest_len = 0
         for i in range(len(s)):
-            s1 = self.helper(s, i, i)  # odd length
-            s2 = self.helper(s, i, i + 1)  # even length
-            res = max(res, s1, s2, key=len)
-        return res
+            # Odd case
+            left = right = i
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+                if (right - left + 1) > longest_len:
+                    longest_len = right - left + 1
+                    longest = s[left : right + 1]
+                left -= 1
+                right += 1
+            # even case
+            left, right = i, i + 1
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+                if (right - left + 1) > longest_len:
+                    longest_len = right - left + 1
+                    longest = s[left : right + 1]
+                left -= 1
+                right += 1
+
+        return longest
 
 
