@@ -4,13 +4,18 @@ class TreeNode:
         self.val = val
         self.left = left
         self.right = right
+
+
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         if not root:
-            return
+            return None
 
         root.left = self.invertTree(root.left)
         root.right = self.invertTree(root.right)
+
         root.left, root.right = root.right, root.left
 
         return root
+
+
