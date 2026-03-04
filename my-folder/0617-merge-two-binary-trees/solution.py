@@ -4,15 +4,12 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-
-
 class Solution:
     def mergeTrees(
         self, root1: Optional[TreeNode], root2: Optional[TreeNode]
     ) -> Optional[TreeNode]:
         if not root1 and not root2:
             return None
-
         v1 = root1.val if root1 else 0
         v2 = root2.val if root2 else 0
         root = TreeNode(v1 + v2)
