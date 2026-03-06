@@ -7,12 +7,17 @@ class ListNode:
 
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        curr, prev = head, None
-        while curr:
-            tmp = curr.next
+
+        def recursive(prev, curr):
+            if not curr:
+                return prev
+
+            nextN = curr.next
             curr.next = prev
             prev = curr
-            curr = tmp
-        return prev
+
+            return recursive(curr, nextN)
+
+        return recursive(None, head)
 
 
