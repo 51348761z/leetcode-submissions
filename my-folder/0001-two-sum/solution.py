@@ -1,12 +1,14 @@
-import enum
 
 
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        seen = {}
+        numToIdx = {}
+
         for i, n in enumerate(nums):
-            if target - n in seen:
-                return [i, seen.get(target - n, 0)]
-            seen[n] = i
+            diff = target - n
+            if diff in numToIdx:
+                return [i, numToIdx.get(diff)]
+            numToIdx[n] = i
         return []
+
 
