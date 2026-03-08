@@ -3,25 +3,24 @@ class Solution:
         if len(p) > len(s):
             return []
 
-        sCount, pCount = {}, {}
+        s_count, p_count = {}, {}
         for i in range(len(p)):
-            sCount[s[i]] = 1 + sCount.get(s[i], 0)
-            pCount[p[i]] = 1 + pCount.get(p[i], 0)
+            s_count[s[i]] = 1 + s_count.get(s[i], 0)
+            p_count[p[i]] = 1 + p_count.get(p[i], 0)
 
-        res = [0] if sCount == pCount else []
+        res = [0] if s_count == p_count else []
 
         l = 0
         for r in range(len(p), len(s)):
-            sCount[s[r]] = 1 + sCount.get(s[r], 0)
-            sCount[s[l]] -= 1
+            s_count[s[r]] = 1 + s_count.get(s[r], 0)
 
-            if sCount[s[l]] == 0:
-                sCount.pop(s[l])
+            s_count[s[l]] -= 1
+            if s_count[s[l]] == 0:
+                s_count.pop(s[l])
             l += 1
 
-            if sCount == pCount:
+            if s_count == p_count:
                 res.append(l)
-
         return res
 
 
