@@ -7,12 +7,11 @@ class ListNode:
 
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
-        slow = fast = head
-        while fast and fast.next:
-            fast = fast.next.next
-            slow = slow.next
-
-            if fast is slow:
+        tutle = rabbit = head
+        while rabbit and rabbit.next:
+            rabbit = rabbit.next.next
+            tutle = tutle.next
+            if rabbit is tutle:
                 return True
         return False
 
