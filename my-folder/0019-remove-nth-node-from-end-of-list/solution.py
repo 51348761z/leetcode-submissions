@@ -8,16 +8,14 @@ class ListNode:
 class Solution:
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
         dummy = ListNode(0, head)
-        slow, fast = dummy, head
-        while n > 0 and fast:
-            fast = fast.next
+        turtle, rabbit = dummy, head
+        while n > 0 and rabbit:
+            rabbit = rabbit.next
             n -= 1
-
-        while fast:
-            slow = slow.next
-            fast = fast.next
-
-        slow.next = slow.next.next
+        while rabbit:
+            rabbit = rabbit.next
+            turtle = turtle.next
+        turtle.next = turtle.next.next
         return dummy.next
 
 
