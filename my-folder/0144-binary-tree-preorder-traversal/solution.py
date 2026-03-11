@@ -8,7 +8,6 @@ class TreeNode:
 
 class Solution:
     def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-
         res, stack = [], []
         curr = root
 
