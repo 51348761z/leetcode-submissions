@@ -11,7 +11,7 @@ function isValid(s: string): boolean {
       stack.push(expectedBracket[c]);
     } else {
       const top = stack.pop();
-      if (!top || top !== c) {
+      if (top !== c) {
         return false;
       }
     }
