@@ -1,6 +1,6 @@
 class TrieNode {
   children = new Map<string, TrieNode>();
-  isEnd = false;
+  isWord: boolean = false;
 }
 
 class Trie {
@@ -10,39 +10,40 @@ class Trie {
   }
 
   insert(word: string): void {
-    let cur = this.root;
-    for (const c of word) {
-      let next = cur.children.get(c);
-      if (!next) {
-        next = new TrieNode();
-        cur.children.set(c, next);
+    let currentNode = this.root;
+    for (const char of word) {
+      let nextNode = currentNode.children.get(char);
+      if (!nextNode) {
+        nextNode = new TrieNode();
       }
-      cur = next;
+      currentNode.children.set(char, nextNode);
+      currentNode = nextNode;
     }
-    cur.isEnd = true;
+
+    currentNode.isWord = true;
   }
 
   search(word: string): boolean {
-    let cur = this.root;
-    for (const c of word) {
-      let next = cur.children.get(c);
-      if (!next) {
-        return false;
-      }
-      cur = next;
+    let currentNode = this.root;
+    for (const char of word) {
+      const nextNode = currentNode.children.get(char);
+      if (!nextNode) return false;
+
+      currentNode = nextNode;
     }
-    return cur.isEnd;
+
+    return currentNode.isWord;
   }
 
   startsWith(prefix: string): boolean {
-    let cur = this.root;
-    for (const c of prefix) {
-      let next = cur.children.get(c);
-      if (!next) {
-        return false;
-      }
-      cur = next;
+    let currentNode = this.root;
+    for (const char of prefix) {
+      const nextNode = currentNode.children.get(char);
+      if (!nextNode) return false;
+
+      currentNode = nextNode;
     }
+
     return true;
   }
 }
