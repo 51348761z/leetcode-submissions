@@ -1,16 +1,14 @@
 function twoSum(nums: number[], target: number): number[] {
-  const indexByNumber = new Map<number, number>();
-
-  for (let index = 0; index < nums.length; index++) {
-    const complement = target - nums[index];
-    const complementIndex = indexByNumber.get(complement);
-
-    if (complementIndex !== undefined) {
-      return [index, complementIndex];
+  const numberByIndex = new Map<number, number>();
+  const length = nums.length;
+  for (let index = 0; index < length; index++) {
+    const diff = target - nums[index];
+    const savedIndex = numberByIndex.get(diff);
+    if (savedIndex !== undefined) {
+      return [savedIndex, index];
     }
 
-    indexByNumber.set(nums[index], index);
+    numberByIndex.set(nums[index], index);
   }
-
   return [];
 }
