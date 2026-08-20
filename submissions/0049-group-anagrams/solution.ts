@@ -1,20 +1,20 @@
 function groupAnagrams(strs: string[]): string[][] {
-  const groupByCode = new Map<string, string[]>();
+  const groupsBySignature = new Map<string, string[]>();
+  const lowercaseACode = "a".charCodeAt(0);
 
   for (const str of strs) {
-    const indexByCode = Array(26).fill(0);
-    const aCode = "a".charCodeAt(0);
+    const letterCounts = new Array<number>(26).fill(0);
 
     for (const char of str) {
-      const charCode = char.charCodeAt(0) - aCode;
-      indexByCode[charCode]++;
+      const letterIndex = char.charCodeAt(0) - lowercaseACode;
+      letterCounts[letterIndex]++;
     }
-    const key = indexByCode.join("#");
 
-    const group = groupByCode.get(key) ?? [];
+    const signature = letterCounts.join("#");
+    const group = groupsBySignature.get(signature) ?? [];
     group.push(str);
-    groupByCode.set(key, group);
+    groupsBySignature.set(signature, group);
   }
 
-  return Array.from(groupByCode.values());
+  return [...groupsBySignature.values()];
 }
